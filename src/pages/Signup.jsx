@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Eye, EyeClosed, EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 
 
@@ -10,7 +11,7 @@ export default function Signup() {
     password: '',
     confirmPassword: ''
   });
-
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [registeredUsers, setRegisteredUsers] = useState(["giovanni", "admin", "testuser"]);
   const [showPassword, setShowPassword] = useState(false);
@@ -51,11 +52,36 @@ export default function Signup() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      console.log("Success:", formData);
+    if (!validateForm()) return;
+
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username: formData.username,
+          email: formData.email,
+          password: formData.password
+        })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrors({ general: data.message || 'Signup failed' });
+        return;
+      }
+
+      localStorage.setItem('token', data.token);
+      navigate('/login'); // redirect after successful signup
+    } catch (err) {
+      console.error(err);
+      setErrors({ general: 'Something went wrong' });
     }
   };
 

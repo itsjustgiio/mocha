@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -7,40 +8,65 @@ export default function Login() {
     password: ''
   });
 
+  const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
+    setFormData(prev => ({
+      ...prev,
       [name]: value
     }));
   };
 
   const validateForm = () => {
-    let newErrors = {};
+    const newErrors = {};
 
     if (!formData.emailOrUsername.trim()) {
-      newErrors.emailOrUsername = "Please enter your username";
+      newErrors.emailOrUsername = 'Please enter your username or email';
     }
 
     if (!formData.password.trim()) {
-      newErrors.password = "Please enter your password";
+      newErrors.password = 'Please enter your password';
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (validateForm()) {
-      console.log("Login attempt:", formData);
-      // 🔥 Later you'll send this to your backend API to authenticate
+  if (!validateForm()) return;
+
+  // DEBUG LOG
+  console.log('Submitting login with:', formData);
+
+  try {
+    const res = await fetch('http://localhost:5000/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        emailOrUsername: formData.emailOrUsername,
+        password: formData.password
+      })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setErrors({ general: data.message || 'Login failed' });
+      return;
     }
-  };
+
+    localStorage.setItem('token', data.token);
+    navigate('/account');
+  } catch (err) {
+    console.error(err);
+    setErrors({ general: 'Something went wrong' });
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#c4a484] flex justify-center items-center font-[Gabarito]">
@@ -48,7 +74,7 @@ export default function Login() {
         <h2 className="text-2xl font-bold mb-6 text-center">Log In</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label>Username</label>
+            <label>Username or Email</label>
             <input
               type="text"
               name="emailOrUsername"
@@ -57,14 +83,16 @@ export default function Login() {
               className="w-full px-3 py-2 border rounded"
               required
             />
-            {errors.emailOrUsername && <p className="text-red-500 text-sm">{errors.emailOrUsername}</p>}
+            {errors.emailOrUsername && (
+              <p className="text-red-500 text-sm">{errors.emailOrUsername}</p>
+            )}
           </div>
 
           <div>
             <label>Password</label>
             <div className="relative">
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
@@ -73,16 +101,24 @@ export default function Login() {
               />
               <button
                 type="button"
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2"
                 onClick={() => setShowPassword(prev => !prev)}
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
-            {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+            {errors.password && (
+              <p className="text-red-500 text-sm">{errors.password}</p>
+            )}
           </div>
 
-          <button type="submit" className="w-full bg-[#654321] text-white py-2 rounded">Log In</button>
+          <button type="submit" className="w-full bg-[#654321] text-white py-2 rounded">
+            Log In
+          </button>
+
+          {errors.general && (
+            <p className="text-red-500 text-sm text-center mt-2">{errors.general}</p>
+          )}
         </form>
       </div>
     </div>
