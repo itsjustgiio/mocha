@@ -21,3 +21,9 @@
 ## 📦 Installation
 
 > ⚠️ Requires [Node.js](https://nodejs.org/) and [MongoDB](https://www.mongodb.com/) installed on your machine.
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/yourusername/mocha.git
+cd mocha
