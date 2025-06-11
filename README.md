@@ -2,9 +2,13 @@
 
 **Mocha** is a full-stack vocabulary learning platform designed to help users improve their word retention through engaging UI, spaced repetition (coming soon), and secure user authentication. Built with the **MERN** stack and styled using **Tailwind CSS** for a sleek and responsive experience.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- 🔐 **JWT Authentication** — Secure user login/signup with protected routes  
+- 📋 **Word Practice Interface** — Add, review, and track vocabulary  
+- 🎨 **Custom UI/UX** — Styled with Tailwind CSS and designed in Figma  
+- 💾 **MongoDB Backend** — Store user accounts and vocabulary data  
+- 🔁 **Planned: Spaced Repetition** — Algorithm for intelligent word review scheduling  
 
 ### `npm start`
 
