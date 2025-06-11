@@ -10,10 +10,13 @@
 - 💾 **MongoDB Backend** — Store user accounts and vocabulary data  
 - 🔁 **Planned: Spaced Repetition** — Algorithm for intelligent word review scheduling  
 
-### `npm start`
+## 🛠️ Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Frontend**: React, Tailwind CSS  
+**Backend**: Node.js, Express.js  
+**Database**: MongoDB  
+**Authentication**: JWT (JSON Web Token)  
+**Design**: Figma 
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
