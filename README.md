@@ -27,7 +27,43 @@
 ```bash
 git clone https://github.com/yourusername/mocha.git
 cd mocha
+```
 
 ### 2. Set up environment variables
 
 Create a .env file in the server/ directory and add:
+
+```bash
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+```
+### 3. Install dependencies
+```bash
+# Backend
+cd server
+npm install
+
+# Frontend
+cd ../client
+npm install
+```
+
+### 4. Run the app
+
+```bash
+# From root
+npm run dev
+```
+This will concurrently run both the React frontend and Express backend.
+
+### 📂 Folder Structure
+
+```bash
+mocha/
+├── client/        # React frontend
+├── server/        # Express backend
+├── .env           # Environment variables
+└── README.md
+```
+### ✨ Credits
+Built by Giovanni Carrion as a personal project to explore full-stack development and design.
