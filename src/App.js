@@ -8,6 +8,7 @@ import About from './pages/About';
 import Contact from './pages/Contact'; 
 import Signup from './pages/Signup';
 import Login from 'pages/Login';
+import Dashboard from 'pages/Dashboard';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
       <Route path="/contact" element={<Layout><Contact /></Layout>} />
       <Route path="/signup" element={<Layout><Signup /></Layout>} />
       <Route path="/login" element={<Layout><Login /></Layout>} />
+      <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
+
     </Routes>
   );
 }

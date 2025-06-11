@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // ✅ Import useAuth
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ export default function Login() {
   });
 
   const navigate = useNavigate();
+  const { login } = useAuth(); // ✅ Get login() from context
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
@@ -36,37 +38,35 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!validateForm()) return;
+    if (!validateForm()) return;
 
-  // DEBUG LOG
-  console.log('Submitting login with:', formData);
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          emailOrUsername: formData.emailOrUsername,
+          password: formData.password
+        })
+      });
 
-  try {
-    const res = await fetch('http://localhost:5000/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        emailOrUsername: formData.emailOrUsername,
-        password: formData.password
-      })
-    });
+      const data = await res.json();
 
-    const data = await res.json();
+      if (!res.ok) {
+        setErrors({ general: data.message || 'Login failed' });
+        return;
+      }
 
-    if (!res.ok) {
-      setErrors({ general: data.message || 'Login failed' });
-      return;
+      localStorage.setItem('token', data.token);
+      login(); // ✅ Tell context we're logged in
+      navigate('/dashboard'); // ✅ Make sure this route is lowercase and correct
+    } catch (err) {
+      console.error(err);
+      setErrors({ general: 'Something went wrong' });
     }
-
-    localStorage.setItem('token', data.token);
-    navigate('/account');
-  } catch (err) {
-    console.error(err);
-    setErrors({ general: 'Something went wrong' });
-  }
-};
+  };
 
   return (
     <div className="min-h-screen bg-[#c4a484] flex justify-center items-center font-[Gabarito]">
