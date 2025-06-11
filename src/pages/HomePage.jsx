@@ -17,9 +17,9 @@ function HomePage() {
             Learn a new word every day with Mocha and watch your communication skills grow.
           </p>
           <div className="space-x-4">
-                <Button variant="inverse">This Week’s Words</Button>
+                <Button variant="mocha">This Week's Words</Button>
             <Link to="/signup">
-                <Button variant="action">Start Learning</Button>
+                <Button variant="inverse">Start Learning</Button>
             </Link>
           </div>
         </div>

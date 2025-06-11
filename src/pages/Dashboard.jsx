@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Button from '../components/Button';
 
 export default function Dashboard() {
   const [username, setUsername] = useState('[Username]');
@@ -6,7 +7,6 @@ export default function Dashboard() {
   const [streak, setStreak] = useState(3); // placeholder for now
 
   useEffect(() => {
-    // set current date
     const today = new Date().toLocaleDateString('en-US', {
       weekday: 'short',
       month: 'short',
@@ -18,38 +18,40 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-[#c4a484] font-[Gabarito] p-6">
-      {/* Header */}
-      <div className="bg-[#FBEBD9] p-4 rounded mb-6">
-        <p className="text-sm">{date}</p>
-        <h1 className="text-xl font-bold">Welcome, {username}!</h1>
-        <p className="text-sm text-gray-700 mt-1">Ready to expand your vocabulary?</p>
-        <p className="text-sm text-orange-600 font-semibold mt-1">🔥 Streak: {streak} day{streak !== 1 && 's'}</p>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-6">
-        {/* Weekly Words */}
-        <div className="bg-[#654321] text-white rounded p-4">
-          <h2 className="text-lg font-semibold border-b border-white pb-1 mb-3">Weekly Words</h2>
-          <div className="grid grid-cols-2 gap-y-2 text-sm">
-            <p>Monday: <span className="font-semibold">[Word]</span></p>
-            <p>Friday: <span className="font-semibold">[Word]</span></p>
-            <p>Tuesday: <span className="font-semibold">[Word]</span></p>
-            <p>Saturday: <span className="font-semibold">[Word]</span></p>
-            <p>Wednesday: <span className="font-semibold">[Word]</span></p>
-            <p>Sunday: <span className="font-semibold">[Word]</span></p>
-            <p>Thursday: <span className="font-semibold">[Word]</span></p>
-          </div>
+      <div className="max-w-5xl mx-auto">
+        {/* Top Welcome Box */}
+        <div className="bg-[#FBEBD9] p-6 rounded mb-6 shadow-md">
+          <p className="text-sm text-gray-700">{date}</p>
+          <h1 className="text-xl font-bold mt-1">Welcome, {username}!</h1>
+          <p className="text-sm text-gray-700 mt-1">Ready to expand your vocabulary?</p>
+          <p className="text-sm text-orange-600 font-semibold mt-2">🔥 Streak: {streak} day{streak !== 1 && 's'}</p>
         </div>
 
-        {/* Daily Word */}
-        <div className="bg-[#FBEBD9] p-4 rounded text-center flex flex-col justify-between">
-          <div>
-            <h2 className="text-lg font-semibold mb-2">Daily Word</h2>
-            <p className="text-xl font-bold mb-4">[Word]</p>
+        {/* Grid Section */}
+        <div className="grid md:grid-cols-2 gap-6 items-start">
+          {/* Weekly Words Section */}
+          <div className="bg-[#654321] text-white rounded p-4 shadow-md">
+            <h2 className="text-lg font-semibold border-b border-white pb-1 mb-3">Weekly Words</h2>
+            <div className="grid grid-cols-2 gap-y-2 text-base">
+              <p>Monday: <span className="font-semibold">[Word]</span></p>
+              <p>Friday: <span className="font-semibold">[Word]</span></p>
+              <p>Tuesday: <span className="font-semibold">[Word]</span></p>
+              <p>Saturday: <span className="font-semibold">[Word]</span></p>
+              <p>Wednesday: <span className="font-semibold">[Word]</span></p>
+              <p>Sunday: <span className="font-semibold">[Word]</span></p>
+              <p>Thursday: <span className="font-semibold">[Word]</span></p>
+            </div>
           </div>
-          <button className="bg-transparent border border-[#654321] hover:bg-[#654321] hover:text-white text-[#654321] px-4 py-2 rounded mt-2">
-            Start Learning This Word
-          </button>
+
+          {/* Daily Word Section */}
+          <div className="bg-[#FBEBD9] p-6 rounded shadow-md text-center flex flex-col justify-between w-full">
+            <div>
+              <h2 className="text-lg font-semibold mb-2">Daily Word</h2>
+              <p className="text-xl font-bold mb-4">[Word]</p>
+            </div>
+            <Button variant="inverse">Start Learning This Word</Button>
+
+          </div>
         </div>
       </div>
     </div>
