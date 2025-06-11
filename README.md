@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# 📚 Mocha — Vocabulary Learning Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Mocha** is a full-stack vocabulary learning platform designed to help users improve their word retention through engaging UI, spaced repetition (coming soon), and secure user authentication. Built with the **MERN** stack and styled using **Tailwind CSS** for a sleek and responsive experience.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- 🔐 **JWT Authentication** — Secure user login/signup with protected routes  
+- 📋 **Word Practice Interface** — Add, review, and track vocabulary  
+- 🎨 **Custom UI/UX** — Styled with Tailwind CSS and designed in Figma  
+- 💾 **MongoDB Backend** — Store user accounts and vocabulary data  
+- 🔁 **Planned: Spaced Repetition** — Algorithm for intelligent word review scheduling  
 
-### `npm start`
+## 🛠️ Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Frontend**: React, Tailwind CSS  
+**Backend**: Node.js, Express.js  
+**Database**: MongoDB  
+**Authentication**: JWT (JSON Web Token)  
+**Design**: Figma 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📦 Installation
 
-### `npm test`
+> ⚠️ Requires [Node.js](https://nodejs.org/) and [MongoDB](https://www.mongodb.com/) installed on your machine.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Clone the repo
 
-### `npm run build`
+```bash
+git clone https://github.com/yourusername/mocha.git
+cd mocha
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Set up environment variables
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Create a .env file in the server/ directory and add:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+```
+### 3. Install dependencies
+```bash
+# Backend
+cd server
+npm install
 
-### `npm run eject`
+# Frontend
+cd ../client
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 4. Run the app
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+# From root
+npm run dev
+```
+This will concurrently run both the React frontend and Express backend.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 📂 Folder Structure
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+mocha/
+├── client/        # React frontend
+├── server/        # Express backend
+├── .env           # Environment variables
+└── README.md
+```
+### ✨ Credits
+Built by Giovanni Carrion as a personal project to explore full-stack development and design.
