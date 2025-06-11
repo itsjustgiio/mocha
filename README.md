@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# 📚 Mocha — Vocabulary Learning Web App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Mocha** is a full-stack vocabulary learning platform designed to help users improve their word retention through engaging UI, spaced repetition (coming soon), and secure user authentication. Built with the **MERN** stack and styled using **Tailwind CSS** for a sleek and responsive experience.
 
 ## Available Scripts
 
