@@ -27,3 +27,5 @@
 ```bash
 git clone https://github.com/yourusername/mocha.git
 cd mocha
+2. Set up environment variables
+Create a .env file in the server/ directory and add:
