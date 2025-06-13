@@ -7,14 +7,34 @@ export default function Dashboard() {
   const [streak, setStreak] = useState(3); // placeholder for now
 
   useEffect(() => {
-    const today = new Date().toLocaleDateString('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    });
-    setDate(today);
-  }, []);
+  // Set today's date
+  const today = new Date().toLocaleDateString('en-US', {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+  setDate(today);
+
+  // Fetch logged-in user's info
+  const fetchUser = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch('http://localhost:5000/api/auth/user', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+      setUsername(data.username);
+    } catch (err) {
+      console.error('Failed to fetch user', err);
+    }
+  };
+
+  fetchUser();
+}, []);
 
   return (
     <div className="min-h-screen bg-[#c4a484] font-[Gabarito] p-6">

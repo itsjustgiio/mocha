@@ -37,36 +37,35 @@ export default function Login() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!validateForm()) return;
+  try {
+    const response = await fetch('http://localhost:5000/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        emailOrUsername: formData.emailOrUsername,
+        password: formData.password,
+      }),
+    });
 
-    try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          emailOrUsername: formData.emailOrUsername,
-          password: formData.password
-        })
-      });
+    const data = await response.json();
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        setErrors({ general: data.message || 'Login failed' });
-        return;
-      }
-
+    if (response.ok) {
       localStorage.setItem('token', data.token);
-      login(); // ✅ Tell context we're logged in
-      navigate('/dashboard'); // ✅ Make sure this route is lowercase and correct
-    } catch (err) {
-      console.error(err);
-      setErrors({ general: 'Something went wrong' });
+      navigate('/dashboard');
+    } else {
+      // handle invalid credentials
+      console.error(data.msg);
+      setErrors({ general: data.msg });
     }
-  };
+  } catch (error) {
+    console.error('Login failed', error);
+  }
+};
 
   return (
     <div className="min-h-screen bg-[#c4a484] flex justify-center items-center font-[Gabarito]">
