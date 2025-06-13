@@ -56,6 +56,7 @@ const handleSubmit = async (e) => {
 
     if (response.ok) {
       localStorage.setItem('token', data.token);
+      login(data.token)
       navigate('/dashboard');
     } else {
       // handle invalid credentials
