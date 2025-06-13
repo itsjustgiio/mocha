@@ -70,4 +70,14 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// GET /user
+router.get('/user', authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (err) {
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;
